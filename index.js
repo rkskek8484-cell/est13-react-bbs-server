@@ -54,6 +54,16 @@ app.post('/write', (req, res) => {
     res.send(result);
   });
 });
+app.post('/update', (req, res) => {
+  console.log(req.body);
+  const { name, title, content, id } = req.body;
+
+  const sqlQuery = 'UPDATE board SET writer=?, title=?, content=? WHERE id=?';
+  db.query(sqlQuery, [name, title, content, id], (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
